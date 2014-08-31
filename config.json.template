@@ -1,0 +1,16 @@
+{
+	"reddit": {
+		"subreddit": {
+			"name": "<name>",
+			"id": "<id>"
+		},
+		"consumer_key": "<consumer_key>",
+		"consumer_secret": "<consumer_secret>",
+		"username": "<username>",
+		"password": "<password>"
+	},
+	"google": {
+		"calendar": "<calendar>",
+		"token": "<token>"
+	}
+}
