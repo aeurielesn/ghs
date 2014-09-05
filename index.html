@@ -1,0 +1,38 @@
+<html>
+<head>
+    <title>Hearthstone Calendar</title>
+    <link rel="stylesheet" href="assets/css/fullcalendar.min.css"/>
+    <link rel="stylesheet" href="assets/css/ghs.css"/>
+</head>
+<body>
+    <div class="container">
+        <div id='top'>
+        <div class='left'>
+            Timezone:
+            <select id='timezone-selector'>
+                <option value='' selected>none</option>
+                <option value='local'>local</option>
+                <option value='Europe/Brussels'>CEST</option>
+                <option value='America/Los_Angeles'>PDT</option>
+                <option value='America/Toronto'>EDT</option>
+                <option value='Asia/Seoul'>KST</option>
+            </select>
+        </div>
+        <div class='right'>
+            <span><input class="type-selector" name="T" type="checkbox" checked> T</span>
+            <span><input class="type-selector" name="S" type="checkbox" checked> S</span>
+            <span><input class="type-selector" name="P" type="checkbox" checked> P</span>
+        </div>
+        <div class='clear'></div>
+    </div>
+        <div id="calendar"></div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/moment.min.js"></script>
+    <script src="assets/js/fullcalendar.min.js"></script>
+    <script src="assets/js/gcal.js"></script>
+    <script src="assets/js/esprima.js"></script>
+    <script src="assets/js/js-yaml.js"></script>
+    <script src="assets/js/ghs.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+	font-size: 14px;
+}
+
+#top {
+	background: #eee;
+	border-bottom: 1px solid #ddd;
+	padding: 0 10px;
+	line-height: 40px;
+	font-size: 12px;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.clear {
+	clear: both;
+}
+
+.tournament {
+	background-color: rgb(123, 209, 72);
+    border-color: rgb(123, 209, 72);
+}
+
+.podcast {
+	color: black;
+	background-color: rgb(246, 145, 178);
+    border-color: rgb(246, 145, 178);
+}
+
+#calendar {
+	padding: 10px;
+	margin: 0 auto;
+}
