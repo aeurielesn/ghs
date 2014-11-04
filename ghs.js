@@ -42,7 +42,7 @@ var request = function(urlstr, headers, params, data) {
         body = querystring.stringify(data);
         options.headers = extend(options.headers, {
             "Content-Type": "application/x-www-form-urlencoded",
-            "Content-Length": body.length,
+            "Content-Length": Buffer.byteLength(body),
         });
     }
     return Q.Promise(function(resolve, reject){
