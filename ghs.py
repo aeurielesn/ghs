@@ -56,7 +56,15 @@ def format_event(event):
   properties = {}
 
   if "description" in event:
-    properties = yaml.safe_load(event["description"])
+    try:
+      properties = yaml.safe_load(event["description"])
+      if type(properties) != dict:
+        properties = {}
+        print "YAML ERROR: description is not a dictionary"
+    except yaml.YAMLError as e:
+      print "YAML ERROR: {0}".format(e)
+    except Exception as e:
+      print "ERROR: {0}".format(e)
 
   # Show the icon depending on the type of the event
   event_type = properties.get("type", "show")
@@ -109,13 +117,13 @@ def main():
       print "updating sidebar"
       sidebar_md = template_md.replace("{{events}}", events_md)
       subreddit.edit_wiki_page("config/sidebar", sidebar_md)
-
-      print "sleeping for 60 seconds"
-      time.sleep(60)
     except KeyboardInterrupt:
       raise
     except Exception as e:
       print "ERROR: {0}".format(e)
+
+    print "sleeping for 60 seconds"
+    time.sleep(60)
 
 if __name__ == '__main__':
   main()
