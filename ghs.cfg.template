@@ -1,0 +1,12 @@
+[reddit]
+username = reddit_username
+password = reddit_password
+subreddit = reddit_subreddit
+oauth_client_id = reddit_oauth_client_id
+oauth_client_secret = reddit_oauth_client_secret
+
+[google]
+token = google_token
+
+[calendar]
+id = calendar_id

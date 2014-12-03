@@ -1,9 +1,0 @@
-[oauth]
-domain: api.reddit.com
-oauth_domain: oauth.reddit.com
-short_domain: redd.it
-ssl_domain: ssl.reddit.com
-user: <user>
-pswd: <password>
-oauth_client_id: <oauth_client_id>
-oauth_client_secret: <oauth_client_secret>
