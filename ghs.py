@@ -6,6 +6,7 @@ import requests
 import time
 import calendar
 import yaml
+import HTMLParser
 
 subreddit_name = ""
 calendar_id = ""
@@ -73,6 +74,7 @@ def name(event):
   
   return name_md
 
+h = HTMLParser.HTMLParser()
 r = praw.Reddit(user_agent="ghs/2.0", site_name="oauth")
 r.login()
 
@@ -84,7 +86,7 @@ while True:
 
   print "fetching sidebar template"
   subreddit = r.get_subreddit(subreddit_name)
-  template_md = subreddit.get_wiki_page("sidebar").content_md
+  template_md = h.unescape(subreddit.get_wiki_page("sidebar").content_md)
 
   print "updating sidebar"
   sidebar_md = template_md.replace("{{events}}", events_md)
