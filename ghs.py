@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
 import praw
 import requests
 import time
@@ -39,7 +38,7 @@ def format_timestamp(event):
   event_time = calendar.timegm(time.strptime(event["start"]["dateTime"], "%Y-%m-%dT%H:%M:%SZ"))
 
   if current_time >= event_time - 60:
-    return "[**LIVE**](#live)"
+    return "LIVE"
   else:
     def format_segment(number, suffix=""):
       return "%d%s" % (number, suffix) if number else ""
@@ -51,9 +50,26 @@ def format_timestamp(event):
 
     return " ".join([format_segment(days, "d"), format_segment(hours, "h"), format_segment(minutes, "m")]).strip()
 
+def format_event_url(event, event_type, timestamp):
+
+  event_url = ""
+  if "location" in event:
+    event_url = event["location"]
+
+  event_url += "#upcoming"
+
+  if timestamp == "LIVE":
+    event_url += "#live"
+
+  event_url += "#" + event_type
+
+  return event_url
+
 def format_event(event):
-  name_md = u""
+
   properties = {}
+
+  timestamp = format_timestamp(event)
 
   if "description" in event:
     try:
@@ -68,25 +84,19 @@ def format_event(event):
 
   # Show the icon depending on the type of the event
   event_type = properties.get("type", "show")
-  if event_type == "show":
-    pass
-  elif event_type == "show":
-    name_md += u"[♫] "
-  else:
-    name_md += u"[♛] ";
-
-  # Event name
-  if "location" in event:
-    name_md += "**[" + event["summary"] + "](" + event["location"] + ")**"
-  else:
-    name_md += "**" + event["summary"] + "**"
 
   # Tagline
+  event_description = "&nbsp;"
   if "description" in properties:
-    name_md += "  \n  %s" % (properties["description"])
-  
-  return name_md
+    event_description = properties["description"]
 
+  event_md = "[~~{}~~\n~~{}~~\n~~{}~~]({})".format(
+    event["summary"], 
+    timestamp, 
+    event_description, 
+    format_event_url(event, event_type, timestamp))
+  
+  return event_md
 
 def main():
   cfg = get_config()
@@ -108,7 +118,7 @@ def main():
       print "fetching calendar data"
       events_md = ""
       for event in get_upcoming_events(cfg.get('calendar', 'id'), cfg.get('google', 'token')):
-        events_md += "* %s  \n  %s\n\n" % (format_timestamp(event), format_event(event))
+        events_md += format_event(event) + "\n\n"
 
       print "fetching sidebar template"
       subreddit = r.get_subreddit(cfg.get('reddit', 'subreddit'))
